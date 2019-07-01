@@ -15,6 +15,9 @@ public class GameplayController : MonoBehaviour
     private Text score_Text;
     private int scoreCount;
 
+    private int eating_apple = 0;
+    private int eating_banana = 0;
+
     private void Start()
     {
         Invoke("StartSpawning", 0.5f);
@@ -73,7 +76,16 @@ public class GameplayController : MonoBehaviour
 
     public void IncreaseScore()
     {
-        scoreCount+=10;
+        eating_banana = 0;
+        eating_apple++;
+        if(eating_apple==1)
+        {
+            scoreCount += 10;
+        }
+        else if(eating_apple>1)
+        {
+            scoreCount += 20;
+        }
         score_Text.text = "Score: " + scoreCount;
         if (PlayerPrefs.GetFloat("Highscore") < scoreCount)
             PlayerPrefs.SetFloat("Highscore", scoreCount);
@@ -81,7 +93,17 @@ public class GameplayController : MonoBehaviour
 
     public void IncreaseScore_2()
     {
-        scoreCount += 20;
+        eating_apple = 0;
+        eating_banana++;
+        if(eating_banana==1)
+        {
+            scoreCount += 20;
+        }
+        else if(eating_banana>1)
+        {
+            scoreCount += 40;
+        }
+
         score_Text.text = "Score: " + scoreCount;
         if (PlayerPrefs.GetFloat("Highscore") < scoreCount)
             PlayerPrefs.SetFloat("Highscore", scoreCount);
